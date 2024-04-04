@@ -25,15 +25,16 @@ class TestEventScheduler(unittest.TestCase):
                           "3. Interview - Job interview - 2024-04-10 - 11:00\n"
         self.assertEqual(self.event_scheduler.view_all_events(), expected_output)
 
-    def test_delete_event(self):
-        # Test deleting an event
-        self.event_scheduler.delete_event("Presentation")
-        self.assertEqual(len(self.event_scheduler.events), 2)
 
     def test_search_events(self):
         # Test searching for events by keyword
         expected_output = "Found Events:\n1. Presentation - Project presentation - 2024-04-07 - 14:00\n"
         self.assertEqual(self.event_scheduler.search_events("Presentation"), expected_output)
+
+    def test_delete_event(self):
+            # Test deleting an event
+            self.event_scheduler.delete_event("Presentation")
+            self.assertEqual(len(self.event_scheduler.events), 2)
 
     def test_edit_event(self):
         # Test editing an existing event
@@ -46,6 +47,7 @@ class TestEventScheduler(unittest.TestCase):
         self.assertEqual(self.event_scheduler.events[0].description, new_description)
         self.assertEqual(self.event_scheduler.events[0].date, new_date)
         self.assertEqual(self.event_scheduler.events[0].time, new_time)
+
 
 if __name__ == "__main__":
     unittest.main()

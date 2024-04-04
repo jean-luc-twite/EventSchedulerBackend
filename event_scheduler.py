@@ -30,11 +30,14 @@ class EventScheduler:
     def view_all_events(self):
         # Method to view all events in the list
         if not self.events:
-            print("No events scheduled.")
+            return "No events scheduled."  # Return message if no events are scheduled
         else:
-            print("All Events:")
+            # Construct the output string
+            output = "All Events:\n"
             for idx, event in enumerate(self.events, start=1):
-                print(f"{idx}. {event.title} - {event.description} - {event.date} - {event.time}")
+                output += f"{idx}. {event.title} - {event.description} - {event.date} - {event.time}\n"
+                print(output)
+            return output
 
     def delete_event(self, title):
         # Method to delete an event with a specific title from the list
@@ -52,11 +55,13 @@ class EventScheduler:
             if keyword in event.title or keyword in event.description:
                 found_events.append(event)
         if not found_events:
-            print("No events found matching the keyword.")
+            return None
         else:
-            print("Found Events:")
+            output="Found Events:\n"
             for idx, event in enumerate(found_events, start=1):
-                print(f"{idx}. {event.title} - {event.description} - {event.date} - {event.time}")
+                output += f"{idx}. {event.title} - {event.description} - {event.date} - {event.time}\n"
+                print(output)
+                return output
 
     def edit_event(self, title):
         # Method to edit an existing event
