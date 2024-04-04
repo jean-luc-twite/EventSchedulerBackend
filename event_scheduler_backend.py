@@ -18,16 +18,8 @@ class EventScheduler:
         self.events = []
 
     def create_event(self, title, description, date, time):
-        try:
-            # Attempt to parse date and time strings into datetime objects
-            event_date = datetime.datetime.strptime(date, "%Y-%m-%d")
-            event_time = datetime.datetime.strptime(time, "%H:%M")
-        except ValueError:
-            # Handle invalid date or time format
-            return False
-
         # Method to create a new event and add it to the list of events
-        event = Event(title, description, event_date, event_time)
+        event = Event(title, description, date, time)
         self.events.append(event)
         return True
 
@@ -116,8 +108,12 @@ def search_events():
 @app.route('/events/edit/<title>', methods=['PUT'])
 def edit_event(title):
     data = request.json
-    success = event_scheduler.edit_event(title, data.get('new_title'), data.get('new_description'),
-                                         data.get('new_date'), data.get('new_time'))
+    new_title = data.get('new_title')
+    new_description = data.get('new_description')
+    new_date = data.get('new_date')
+    new_time = data.get('new_time')
+
+    success = event_scheduler.edit_event(title, new_title, new_description, new_date, new_time)
     if success:
         return f'Event "{title}" edited successfully', 200
     else:
